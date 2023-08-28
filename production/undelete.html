@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <title>Min Sky</title>
+    <link rel="stylesheet" href="undelete-styles.css" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div id="logo"><a href="/"><img alt="" src="img/captureCloudLogo.png" width="64px" /></a></div>
+        </div>
+    </header>
+    <main style="display: flex; align-items: center">
+        <div style="width:100%; text-align: center;">
+            <div class="dialog prompt">
+                <h1 class="title">
+                    <div class="lang-en">Cancel deletion of account</div>
+                    <div class="lang-no">Avbryte sletting av konto</div>
+                </h1>
+                <p class="description">
+                    <div class="lang-en">Click here to cancel deletion of your Capture account:</div>
+                    <div class="lang-no">Trykk her for å avbryte sletting av din Min-Sky konto:</div>
+                </p>
+                <a id="cancel-deletion-button" class="button">
+                    <div class="lang-en">Cancel deletion</div>
+                    <div class="lang-no">Avbryt sletting</div>
+                </a>
+            </div>
+            <div class="dialog cancelling">
+                <div class="lang-en">Cancelling ...</div>
+                <div class="lang-no">Avbryter ...</div>
+            </div>
+            <div class="dialog success">
+                <div class="lang-en">The deletion of your account has now been cancelled.</div>
+                <div class="lang-no">Slettingen av din konto har nå blitt avbrutt.</div>
+            </div>
+            <div class="dialog invalid">
+                <div class="lang-en">The link you clicked has expired. It is either too old or has already been used.</div>
+                <div class="lang-no">Lenken du åpnet virker ikke lenger. Den er enten for gammel, eller har allerede blitt brukt.</div>
+            </div>
+            <div class="dialog not-found">
+                <div class="lang-en">Cancellation failed. Try again or contact customer support.</div>
+                <div class="lang-no">Klarte ikke å avbryte sletting. Vennligst prøv igjen eller kontakt kundeservice.</div>
+            </div>
+            <div class="dialog unexpected">
+                <div class="lang-en">Something unexpected happened. Please try again.</div>
+                <div class="lang-no">En uventet feil oppstod. Vennligst prøv igjen.</div>
+            </div>
+
+            <div class="dialog broken-link">
+                <div class="lang-en">Broken link</div>
+                <div class="lang-no">Feil i lenken</div>
+            </div>
+            <div id="error" class="dialog error"></div>
+        </div>
+    </main>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-text">
+                <img src="img/telenor_propeller_small.png" width="50px" />
+            </div>
+            <div class="footer-line"></div>
+            <div id="companyName">© 2021 Telenor Software Lab, Trondheim</div>
+        </div>
+    </footer>
+    <script>
+        if (window.location.search) {
+            window.sessionStorage.setItem('params', window.location.search);
+            window.location.replace(window.location.href.split("?")[0]);
+        } else {
+            const showClass = (className) => {
+                const elements = document.getElementsByClassName(className);
+                for (let i = 0; i < elements.length; i++) {
+                    elements.item(i).classList.add("show");
+                }
+            }
+            const hideClass = (className) => {
+                const elements = document.getElementsByClassName(className);
+                for (let i = 0; i < elements.length; i++) {
+                    elements.item(i).classList.remove("show");
+                }
+            }
+
+            const paramString = window.sessionStorage.getItem('params');
+            const urlParams = new URLSearchParams(paramString);
+            window.sessionStorage.removeItem('params');
+            if (!paramString || !urlParams.get('session_id')) {
+                showClass("broken-link");
+                throw new Error('Broken link - no parameters stored');
+            }
+
+            const hostname = location.hostname.split('.')[0]
+            let urlBase = '';
+            if (hostname === 'web') {
+                urlBase = 'https://a0.cptr.no';
+            } else if (hostname === 'web-staging') {
+                urlBase = 'https://a0-staging.cptr.no';
+            } else {
+                urlBase = 'https://a0-client.univex.no';
+            }
+            const sessionId = urlParams.get('session_id');
+            const url = `${urlBase}/st/4/usercallbacks/${encodeURIComponent(sessionId)}`;
+
+            const lang = ['no', 'nb', 'nn'].includes(urlParams.get('lang')) ? 'no' : 'en';
+            showClass(`lang-${lang}`);
+            showClass("prompt");
+            document.getElementById('cancel-deletion-button').onclick = () => {
+                hideClass("prompt");
+                showClass("cancelling");
+                fetch(url, {method: 'POST', mode: 'cors', body: ''})
+                    .then(response => {
+                        hideClass("cancelling");
+                        if (response.ok) {
+                            showClass("success");
+                        } else if (response.status === 400) {
+                            showClass("invalid");
+                        } else if (response.status === 404) {
+                            showClass("not-found");
+                        } else {
+                            showClass("unexpected");
+                        }
+                    })
+                    .catch(error => {
+                        document.getElementById("error").innerHTML = error;
+                        hideClass("cancelling");
+                        showClass("error");
+                    })
+            }
+        }
+    </script>
+</body>
+</html>

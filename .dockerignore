@@ -1,0 +1,10 @@
+.git/
+debian
+docker/
+docker-compose.yml
+Jenkins*
+README.md
+tests/e2e
+
+node_modules/
+builds/

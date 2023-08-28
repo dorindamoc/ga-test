@@ -1,0 +1,12 @@
+# Usage: IMAGE=CaptureRedux:latest docker-compose run cypress
+version: '3'
+services:
+    redux-test:
+        image: ${IMAGE}
+    cypress:
+        build:
+            context: .
+            dockerfile: cypress.Dockerfile
+        image: cypress_captureredux:${CYPRESS_TAG:-latest}
+        links:
+            - redux-test

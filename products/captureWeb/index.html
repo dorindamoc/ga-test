@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Min Sky</title>
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+    </head>
+    <body>
+        <div id="app">
+            <style>
+                @keyframes ripple {
+                    0% {
+                        transform: scale(1);
+                        transform-origin: center;
+                        opacity: 0.2;
+                    }
+                    100% {
+                        transform: scale(4);
+                        transform-origin: center;
+                        opacity: 0;
+                    }
+                }
+                .loading-capture-logo {
+                    width: 150px;
+                    height: 150px;
+                    position: absolute;
+                    top: calc(50% - 75px);
+                    left: calc(50% - 75px);
+                }
+                .ripple-dot-1 {
+                    width: 30px;
+                    height: 30px;
+                    position: absolute;
+                    top: 12%;
+                    left: 76%;
+                    display: block;
+                    background-color: #0091d2;
+                    border-radius: 50%;
+                    animation: ripple 1.3s linear infinite;
+                }
+
+                .ripple-dot-2 {
+                    width: 30px;
+                    height: 30px;
+                    position: absolute;
+                    top: 12%;
+                    left: 76%;
+                    display: block;
+                    background-color: #0091d2;
+                    border-radius: 50%;
+                    animation: ripple 1.3s linear infinite 0.65s;
+                }
+            </style>
+            <div class="loading-capture-logo">
+                <svg viewBox="0 0 70 70" version="1.1">
+                    <g
+                        id="CaptureLogo_cloud_icon"
+                        stroke="none"
+                        strokeWidth="1"
+                        fill="#0091D2"
+                        fillRule="evenodd"
+                        transform="translate(0.000000, 8.000000)">
+                        <path
+                            id="CaptureLogo_cloud_dot"
+                            d="M67.5016835,7.33517849 C67.5016835,11.3559582 64.2406448,14.616494 60.2143128,14.616494 C56.1878665,14.616494 52.9248852,11.3559582 52.9248852,7.33517849 C52.9248852,3.31633875 56.1878665,0.0558029541 60.2143128,0.0558029541 C64.2406448,0.0558029541 67.5016835,3.31633875 67.5016835,7.33517849 L67.5016835,7.33517849 Z" />
+                        <path
+                            id="CaptureLogo_cloud_back"
+                            d="M21.4590674,31.5210233 C22.0310091,28.4921439 23.3133925,25.7316665 25.1026956,23.379726 C23.2299725,20.3611171 19.9363657,18.3507273 16.1705785,18.3507273 C11.3808958,18.3507273 7.34633609,21.5909503 6.04361188,26.0284834 C2.64624426,26.4370204 0,29.3479033 0,32.9134724 C0,36.7635339 3.06151617,39.8797124 6.84364453,39.8797124 L11.1040098,39.8797124 C12.4313029,35.2897197 16.5227711,31.8584657 21.4590674,31.5210233 L21.4590674,31.5210233 Z" />
+                        <path
+                            id="CaptureLogo_cloud_front"
+                            d="M59.0743149,30.3521282 C56.9146495,23.4101951 50.2746414,18.3507273 42.4131578,18.3507273 C33.0943373,18.3507273 25.5077972,25.4592705 25.0497868,34.3892266 C24.5326967,34.2977052 24.0074931,34.2448693 23.4660626,34.2448693 C18.3772105,34.2448693 14.2490603,38.2453363 14.2490603,43.1870359 C14.2490603,47.4395862 17.316633,51.3627963 21.4203285,52.2653435 L57.2015917,52.2653435 C63.4243853,52.2653435 69.038441,47.2363448 69.038441,41.201067 C69.038441,35.5906448 64.6824283,30.9802253 59.0743149,30.3521282 L59.0743149,30.3521282 Z" />
+                    </g>
+                </svg>
+                <div class="ripple-dot-1"></div>
+                <div class="ripple-dot-2"></div>
+            </div>
+        </div>
+        <script type="module" src="./index.tsx"></script>
+    </body>
+</html>

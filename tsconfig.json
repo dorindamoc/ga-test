@@ -1,0 +1,30 @@
+{
+    "extends": "@tsconfig/vite-react/tsconfig.json",
+    "compilerOptions": {
+        "target": "ES6",
+        "baseUrl": "./",
+        "isolatedModules": true,
+        "allowSyntheticDefaultImports": true,
+        "outDir": "dist",
+        "sourceMap": true,
+        "types": [
+            "cypress",
+            "chromecast-caf-sender",
+            "croppie",
+            "jsdom",
+            "node",
+            "react",
+            "react-redux",
+            "styled-components",
+            "chromecast-caf-receiver",
+            "crypto-js",
+            "qrcode",
+            "react-dom"
+        ],
+        "paths": {
+            "@assets/*": ["lib/assets/*"],
+            "@components/*": ["lib/components/*"],
+            "@support/*": ["tests/cypress/support/*"]
+        }
+    }
+}

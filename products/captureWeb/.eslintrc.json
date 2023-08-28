@@ -1,0 +1,20 @@
+{
+    "extends": ["../../.eslintrc.json"],
+    "rules": {
+        "no-restricted-imports": [
+            "error",
+            {
+                "patterns": [
+                    {
+                        "group": [
+                            "**/captureCastReceiver/**",
+                            "**/captureTV/**",
+                            "**/goto.captu.re/*"
+                        ],
+                        "message": "Import pollution: Should not import from distribution packages."
+                    }
+                ]
+            }
+        ]
+    }
+}

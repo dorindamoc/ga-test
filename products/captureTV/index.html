@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta
+            id="viewport"
+            name="viewport"
+            content="width=device-width, initial-scale=1" />
+        <script>
+            if (window.AndroidTV) {
+                const scale = 1 / window.devicePixelRatio
+                document
+                    .getElementById('viewport')
+                    .setAttribute(
+                        'content',
+                        'width=device-width, initial-scale=' + scale,
+                    )
+            }
+        </script>
+        <title>Capture TV</title>
+    </head>
+    <body>
+        <div id="app"></div>
+        <script type="module" src="./index.tsx"></script>
+    </body>
+</html>

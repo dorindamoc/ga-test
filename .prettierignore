@@ -1,0 +1,11 @@
+.vscode/
+node_modules/
+docs/
+
+# ignore translated strings file
+lib/assets/translatedStrings.ts
+
+# ignore generated files
+pnpm-lock.yaml
+
+README.md
