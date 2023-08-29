@@ -1,0 +1,23 @@
+name: Tests
+run-name: Test runs on ${{ github.ref_name }}
+on: [push]
+
+permissions:
+    contents: read
+
+jobs:
+    unittests:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+            - uses: ./.github/actions/setup
+            - name: Run unittest command
+              run: pnpm test
+
+    e2etests:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+            - uses: ./.github/actions/setup
+            - run: pnpm web
+            - run: pnpm e2e:web
