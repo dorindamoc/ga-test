@@ -31,6 +31,4 @@ RUN mkdir builds
 RUN mv $ARTIFACT_PATH/dist ./builds/public_html
 RUN zip -r /builds.zip ./builds
 
-RUN mv ./builds/public_html ./production
-WORKDIR /workdir/production
-CMD node server.cjs
+CMD node hapi_server.cjs
