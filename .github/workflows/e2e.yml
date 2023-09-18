@@ -1,0 +1,19 @@
+name: E2E Tests
+run-name: End-to-end test runs on ${{ github.ref_name }}
+on: [push]
+
+permissions:
+    contents: read
+
+jobs:
+    cypress-run:
+        runs-on: ubuntu-22.04
+        steps:
+            - uses: actions/checkout@v3
+            - uses: ./.github/actions/setup
+            - name: Cypress run
+              uses: cypress-io/github-action@v6
+              with:
+                  build: pnpm build:web
+                  start: pnpm start
+                  wait-on: 'http://0.0.0.0:3000'

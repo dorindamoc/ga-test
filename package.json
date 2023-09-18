@@ -21,7 +21,8 @@
         "test": "mocha",
         "lint": "eslint lib config products tests",
         "lint:fix": "eslint --fix lib config products tests",
-        "format": "prettier --write ./lib ./config ./products ./tests"
+        "format": "prettier --write ./lib ./config ./products ./tests",
+        "start": "node hapi_server.cjs"
     },
     "engines": {
         "node": ">=16",

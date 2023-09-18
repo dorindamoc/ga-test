@@ -1,0 +1,24 @@
+version: '3'
+services:
+    artifact-server:
+        build:
+            context: .
+            dockerfile: server.Dockerfile
+        networks:
+            - main
+        ports:
+            - '8080:8080'
+        container_name: my-artifact-server
+
+    test-runner:
+        build:
+            context: .
+            dockerfile: cypress.Dockerfile
+        networks:
+            - main
+        depends_on:
+            - artifact-server
+        container_name: my-test-runner
+
+networks:
+    main:
