@@ -14,6 +14,7 @@ jobs:
             - name: Cypress run
               uses: cypress-io/github-action@v6
               with:
+                  config-file: products/captureWeb/cypress.config.ts
                   build: pnpm build:web
                   start: pnpm start
                   wait-on: 'http://0.0.0.0:3000'

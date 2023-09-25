@@ -1,5 +1,5 @@
-name: Tests
-run-name: Test runs on ${{ github.ref_name }}
+name: Unitests
+run-name: Unit test runs on ${{ github.ref_name }}
 on: [push]
 
 permissions:

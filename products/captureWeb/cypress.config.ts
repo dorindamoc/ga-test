@@ -9,18 +9,19 @@ export default defineConfig({
                 'file:preprocessor',
                 vitePreprocessor(resolve(__dirname, './vite.config.ts')),
             ),
-            on(
-                'task', {
-                log: (message) => {
-                    console.log(message)
-                    return null
-                },
-              }
-            )
+                on('task', {
+                    log: (message) => {
+                        console.log(message)
+                        return null
+                    },
+                })
         },
-        baseUrl: 'https://localhost:9000',
+        baseUrl: 'http://0.0.0.0:3000',
         chromeWebSecurity: false,
-        specPattern: ['./cypress/e2e/**/*.spec.ts', './cypress/e2e/*.cy.ts'],
+        specPattern: [
+            'products/captureWeb/cypress/e2e/**/*.spec.ts',
+            'products/captureWeb/cypress/e2e/*.cy.ts',
+        ],
         videoUploadOnPasses: false,
         video: false,
         screenshotsFolder: 'cypress/screenshots',
@@ -28,6 +29,7 @@ export default defineConfig({
             runMode: 2,
             openMode: 0,
         },
+        supportFile: 'products/captureWeb/cypress/support/e2e.ts',
     },
 
     component: {
